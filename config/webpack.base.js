@@ -11,6 +11,8 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // 压缩JS
 const TerserPlugin = require("terser-webpack-plugin");
+// eslint 检查
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
   // 入口
@@ -84,7 +86,9 @@ module.exports = {
     // 每次构建前清除dist目录
     new CleanWebpackPlugin(),
     // 代码热更新
-    new HotModuleReplacementPlugin()
+    new HotModuleReplacementPlugin(),
+    // eslint检查
+    new ESLintPlugin({ fix: true })
   ],
 
   devtool: 'hidden-source-map'

@@ -1,9 +1,10 @@
 import React from 'react';
-// import './App.less';
+import './App.less';
 
 const App = () => {
+  const a = 123;
   return (
-    <div id='app'>hello App</div>
+    <div className='app'>hello {a}</div>
   );
 };
 
