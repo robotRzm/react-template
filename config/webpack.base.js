@@ -43,6 +43,20 @@ module.exports = {
           "css-loader",
           "less-loader"
         ]
+      },
+      {
+        test: /.(png|jpe?g|gif|svg|webg)$/,
+        type: 'asset',
+        generator: {
+          // 输出的资源文件名称 (同上文output.assetModuleFilename)
+          filename: 'static/media/[name][contenthash:8][ext][query]'
+        },
+        parser: {
+          dataUrlCondition: {
+            // 超过10kb导出文件,小于10kb直接使用base64格式添加到行内
+            maxSize: 10 * 1024
+          }
+        }
       }
     ]
   },
@@ -58,7 +72,8 @@ module.exports = {
   plugins: [
     // 生产HTML模板
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "../index.html")
+      template: path.resolve(__dirname, "../index.html"),
+      title: 'react-template'
     }),
     // 提取CSS
     new MiniCssExtractPlugin({
