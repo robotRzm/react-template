@@ -1,4 +1,9 @@
 module.exports = {
+    "settings": {
+        "react": {
+            "version": "999.999.999"
+        }
+    },
     "env": {
         "browser": true,
         "es2021": true
