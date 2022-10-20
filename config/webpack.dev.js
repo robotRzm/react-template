@@ -1,4 +1,4 @@
-const {merge} = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const base = require('./webpack.base.js');
 
 module.exports = merge(base, {
@@ -9,6 +9,7 @@ module.exports = merge(base, {
 
   // 开发服务器配置
   devServer: {
-    port: 8000 // 默认端口是8080
+    port: 8000, // 默认端口是8080
+    hot: true // 热更新
   }
 });
