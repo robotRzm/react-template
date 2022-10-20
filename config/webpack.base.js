@@ -1,4 +1,5 @@
 const path = require("path");
+// 导出热更新
 const { HotModuleReplacementPlugin } = require('webpack');
 // 引入html-webpack-plugin插件
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -8,6 +9,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 // 引入clean-webpack-plugin插件
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// 压缩JS
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   // 入口
@@ -30,10 +33,7 @@ module.exports = {
       {
         test: /\.js|jsx$/,
         exclude: /node_modules/,
-        use: [
-          "thread-loader",
-          "babel-loader"
-        ]
+        use: ["babel-loader"]
       },
       {
         test: /\.(less|css)$/,
@@ -46,7 +46,7 @@ module.exports = {
       },
       {
         test: /.(png|jpe?g|gif|svg|webg)$/,
-        type: 'asset',
+        type: 'asset/resourceay',
         generator: {
           // 输出的资源文件名称 (同上文output.assetModuleFilename)
           filename: 'static/media/[name][contenthash:8][ext][query]'
@@ -65,6 +65,8 @@ module.exports = {
     minimizer: [
       // 压缩项CSS
       new CssMinimizerPlugin(),
+      // 压缩JS
+      new TerserPlugin(),
     ]
   },
 
@@ -83,5 +85,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     // 代码热更新
     new HotModuleReplacementPlugin()
-  ]
+  ],
+
+  devtool: 'hidden-source-map'
 };
