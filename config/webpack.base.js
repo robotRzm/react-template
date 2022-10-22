@@ -21,7 +21,8 @@ module.exports = {
   // 输出
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "../dist")  // 注意此处输出目录是父级文件夹
+    path: path.resolve(__dirname, "../dist"),  // 注意此处输出目录是父级文件夹
+    publicPath: '/' // 指定资源文件引用的目录
   },
 
   // 解析模块的规则

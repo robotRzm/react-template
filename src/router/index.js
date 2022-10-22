@@ -12,12 +12,19 @@ const router = createBrowserRouter(
       children: [
         {
           path: "home",
-          element: <Suspense><Home /></Suspense>
+          element: (
+            <Suspense fallback={<div>...</div>}>
+              <Home />
+            </Suspense>
+          )
         },
         {
-          path: "about",
-          element: <Suspense><About /></Suspense>
-
+          path: "about/:id",
+          element: (
+            <Suspense fallback={<div>...</div>}>
+              <About />
+            </Suspense>
+          )
         }
       ]
     }

@@ -1,25 +1,21 @@
 import React from 'react';
 import {
   Outlet, 
-  Link,
-  useSearchParams
+  Link
 } from 'react-router-dom';
 import './App.less';
 
 const App = () => {
-  const [urlSearchParams] = useSearchParams();
-  console.log(urlSearchParams.get("aa"))
   return (
     <div className='app'>
-      hello React
+      hello React ! ! !
       <br />
       <Link to='home'>home</Link>
       <br />
-      <Link to='about'>about</Link>
+      <Link to='about/123'>about</Link>
       <br />
       <Outlet />
     </div>
-
   );
 };
 
