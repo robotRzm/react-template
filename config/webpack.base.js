@@ -28,6 +28,9 @@ module.exports = {
   // 解析模块的规则
   resolve: {
     extensions: [".js", ".jsx", ".json"],//以上文件引入可以省略后缀名
+    alias: {
+      '@': path.join(__dirname, '../src'), //可以指向 src 目录
+    }
   },
 
   // 模块加载器
