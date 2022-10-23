@@ -11,6 +11,11 @@ module.exports = merge(base, {
   devServer: {
     port: 8000, // 默认端口是8080
     hot: true, // 热更新
-    historyApiFallback: true // 路由配置文件
+    historyApiFallback: true, // 路由配置文件
+    proxy: {
+      '/': {
+        target: 'http://localhost:8019'
+      }
+    }
   }
 });
