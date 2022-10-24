@@ -3,7 +3,7 @@ import {
   Outlet,
   Link
 } from 'react-router-dom';
-import './App.less';
+import './app.less';
 
 const App = () => {
   return (

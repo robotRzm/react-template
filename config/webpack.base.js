@@ -1,19 +1,15 @@
 const path = require("path");
-// 导出热更新
-const { HotModuleReplacementPlugin } = require('webpack');
 // 引入html-webpack-plugin插件
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // 提取css单文件
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// 优化 / 压缩CSS
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 // 引入clean-webpack-plugin插件
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// 压缩JS
-const TerserPlugin = require("terser-webpack-plugin");
+
 // eslint 检查
 const ESLintPlugin = require('eslint-webpack-plugin');
-
+const NODE_ENV = process.env.NODE_ENV;
+console.log("--------" + NODE_ENV + "-----------");
 module.exports = {
   // 入口
   entry: path.resolve(__dirname, '../src/index.js'),
@@ -45,7 +41,7 @@ module.exports = {
         test: /\.(less|css)$/,
         use: [
           // 提取js中的css成单独文件, 取代style-loader
-          MiniCssExtractPlugin.loader,
+          NODE_ENV === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
           "css-loader",
           "less-loader"
         ]
@@ -67,15 +63,6 @@ module.exports = {
     ]
   },
 
-  optimization: {
-    minimizer: [
-      // 压缩项CSS
-      new CssMinimizerPlugin(),
-      // 压缩JS
-      new TerserPlugin(),
-    ]
-  },
-
   // // 插件
   plugins: [
     // 生产HTML模板
@@ -83,17 +70,9 @@ module.exports = {
       template: path.resolve(__dirname, "../index.html"),
       title: 'react-template'
     }),
-    // 提取CSS
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].[hash].css',
-    }),
     // 每次构建前清除dist目录
     new CleanWebpackPlugin(),
-    // 代码热更新
-    new HotModuleReplacementPlugin(),
     // eslint检查
     new ESLintPlugin({ fix: true })
-  ],
-
-  devtool: 'hidden-source-map'
+  ]
 };
