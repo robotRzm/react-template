@@ -5,7 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // 引入clean-webpack-plugin插件
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
 // eslint 检查
 const ESLintPlugin = require('eslint-webpack-plugin');
 const NODE_ENV = process.env.NODE_ENV;
@@ -73,6 +72,10 @@ module.exports = {
     // 每次构建前清除dist目录
     new CleanWebpackPlugin(),
     // eslint检查
-    new ESLintPlugin({ fix: true })
+    new ESLintPlugin({ fix: true }),
+    // 提取CSS
+    NODE_ENV === 'production' && new MiniCssExtractPlugin({
+      filename: 'css/[name].[hash].css',
+    }),
   ]
 };

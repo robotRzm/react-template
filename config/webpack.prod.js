@@ -3,8 +3,6 @@ const { merge } = require('webpack-merge');
 const TerserPlugin = require("terser-webpack-plugin");
 // 优化 / 压缩CSS
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-// 提取css单文件
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const base = require('./webpack.base.js');
 
 module.exports = merge(base, {
@@ -17,12 +15,5 @@ module.exports = merge(base, {
       // 压缩JS
       new TerserPlugin(),
     ]
-  },
-
-  plugins: [
-    // 提取CSS
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].[hash].css',
-    }),
-  ]
+  }
 });
